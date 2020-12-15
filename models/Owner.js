@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Owner.associate = (models) => {
-    Owner.belongsTo(models.Store, { foreignKey: 'store_id', allowNull: false });
+    Owner.belongsTo(models.Customer, { foreignKey: 'customer_id', allowNull: false });
     Owner.hasOne(models.OwnerAddress, { foreignKey: 'owner_id' });
   };
 

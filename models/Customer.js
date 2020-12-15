@@ -1,7 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Store = sequelize.define(
-    'Store',
+  const Customer = sequelize.define(
+    'Customer',
     {
+      code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,18 +29,18 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'stores',
+      tableName: 'customers',
       timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     }
   );
 
-  Store.associate = (models) => {
-    Store.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
-    Store.hasOne(models.Owner, { foreignKey: 'store_id' });
-    Store.hasMany(models.StoreAddress, { foreignKey: 'store_id' });
-    Store.hasMany(models.SaleOrder, { foreignKey: 'store_is' });
+  Customer.associate = (models) => {
+    Customer.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
+    Customer.hasOne(models.Owner, { foreignKey: 'customer_id' });
+    Customer.hasMany(models.CustomerAddress, { foreignKey: 'customer_id' });
+    Customer.hasMany(models.SaleOrder, { foreignKey: 'customer_is' });
   };
-  return Store;
+  return Customer;
 };

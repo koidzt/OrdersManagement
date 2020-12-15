@@ -2,6 +2,11 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
     {
+      code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
       first_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -13,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -45,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = (models) => {
-    User.hasMany(models.Store, { foreignKey: 'user_id' });
+    User.hasMany(models.Customer, { foreignKey: 'user_id' });
     User.hasMany(models.SaleOrder, { foreignKey: 'user_id' });
   };
 

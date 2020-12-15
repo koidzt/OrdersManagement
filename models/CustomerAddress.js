@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const StoreAddress = sequelize.define(
-    'StoreAddress',
+  const CustomerAddress = sequelize.define(
+    'CustomerAddress',
     {
       address: {
         type: DataTypes.STRING,
@@ -24,13 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'store_addresses',
+      tableName: 'customer_addresses',
     }
   );
 
-  StoreAddress.associate = (models) => {
-    StoreAddress.belongsTo(models.Owner, { foreignKey: 'store_id', allowNull: false });
+  CustomerAddress.associate = (models) => {
+    CustomerAddress.belongsTo(models.Owner, { foreignKey: 'customer_id', allowNull: false });
   };
 
-  return StoreAddress;
+  return CustomerAddress;
 };
