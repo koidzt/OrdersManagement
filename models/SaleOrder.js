@@ -3,13 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     'SaleOrder',
     {
       so: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(8),
         allowNull: false,
         unique: true,
       },
       date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+      },
+      po: {
+        type: DataTypes.STRING,
       },
       payment_term: {
         type: DataTypes.STRING,
