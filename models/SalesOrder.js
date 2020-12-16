@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const SaleOrder = sequelize.define(
+  const SalesOrder = sequelize.define(
     'SalesOrder',
     {
       so: {
@@ -38,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  SaleOrder.associate = (models) => {
-    SaleOrder.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
-    SaleOrder.belongsTo(models.Customer, { foreignKey: 'customer_id', allowNull: false });
-    SaleOrder.hasMany(models.ProductList, { foreignKey: 'sales_order_id' });
+  SalesOrder.associate = (models) => {
+    SalesOrder.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
+    SalesOrder.belongsTo(models.Customer, { foreignKey: 'customer_id', allowNull: false });
+    SalesOrder.hasMany(models.ProductList, { foreignKey: 'sales_order_id' });
   };
 
-  return SaleOrder;
+  return SalesOrder;
 };
