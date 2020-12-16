@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const SaleOrder = sequelize.define(
-    'SaleOrder',
+    'SalesOrder',
     {
       so: {
         type: DataTypes.STRING(8),
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'sale_orders',
+      tableName: 'sales_orders',
       timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updates_at',
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   SaleOrder.associate = (models) => {
     SaleOrder.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
     SaleOrder.belongsTo(models.Customer, { foreignKey: 'customer_id', allowNull: false });
-    SaleOrder.hasMany(models.ProductList, { foreignKey: 'sale_order_id' });
+    SaleOrder.hasMany(models.ProductList, { foreignKey: 'sales_order_id' });
   };
 
   return SaleOrder;

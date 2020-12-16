@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     Customer.belongsTo(models.User, { foreignKey: 'user_id', allowNull: false });
     Customer.hasOne(models.Owner, { foreignKey: 'customer_id' });
     Customer.hasMany(models.CustomerAddress, { foreignKey: 'customer_id' });
-    Customer.hasMany(models.SaleOrder, { foreignKey: 'customer_is' });
+    Customer.hasMany(models.SalesOrder, { foreignKey: 'customer_is' });
   };
   return Customer;
 };

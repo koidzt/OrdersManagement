@@ -34,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       area_code: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       is_active: {
         type: DataTypes.BOOLEAN,
@@ -52,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.hasMany(models.Customer, { foreignKey: 'user_id' });
-    User.hasMany(models.SaleOrder, { foreignKey: 'user_id' });
+    User.hasMany(models.SalesOrder, { foreignKey: 'user_id' });
   };
 
   return User;
