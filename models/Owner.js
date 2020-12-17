@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(13),
         allowNull: false,
       },
-      tel: {
+      phone: {
         type: DataTypes.STRING(10),
       },
     },
     {
       tableName: 'owners',
+      timestamps: false,
     }
   );
 
