@@ -11,6 +11,7 @@ module.exports = {
     return queryInterface.bulkInsert('customers', [
       {
         user_id: area1.id,
+        area_code: 'AR1',
         code: 'CTM1-0001',
         name: 'Customer1',
         contact: 'กี้',
@@ -23,6 +24,7 @@ module.exports = {
       },
       {
         user_id: area1.id,
+        area_code: 'AR1',
         code: 'CTM1-0002',
         name: 'Customer2',
         contact: 'ดาว',
@@ -35,6 +37,7 @@ module.exports = {
       },
       {
         user_id: area2.id,
+        area_code: 'AR2',
         code: 'CTM1-0003',
         name: 'Customer3',
         contact: 'พล',
@@ -47,6 +50,7 @@ module.exports = {
       },
       {
         user_id: area2.id,
+        area_code: 'AR2',
         code: 'CTM1-0004',
         name: 'Customer4',
         contact: 'เอก',
@@ -59,6 +63,7 @@ module.exports = {
       },
       {
         user_id: area3.id,
+        area_code: 'AR3',
         code: 'CTM1-0005',
         name: 'Customer5',
         contact: 'หยิน',

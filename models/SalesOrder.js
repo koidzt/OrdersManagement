@@ -24,9 +24,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       discount: {
         type: DataTypes.DOUBLE,
+        defaultValue: '0',
+      },
+      vat: {
+        type: DataTypes.DECIMAL(3, 2),
       },
       total: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      total_in_vat: {
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
     },

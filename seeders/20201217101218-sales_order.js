@@ -1,6 +1,6 @@
 'use strict';
 
-const { User, Customer, ProductList } = require('../models');
+const { User, Customer } = require('../models');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -19,7 +19,9 @@ module.exports = {
         payment_term: customer2.payment_term,
         credit_term: customer2.credit_term,
         discount: '0.03',
-        total: '726.53',
+        vat: '0.07',
+        total: '679',
+        total_in_vat: '726.53',
         created_at: new Date(),
         updated_at: new Date(),
       },
@@ -32,7 +34,9 @@ module.exports = {
         payment_term: customer3.payment_term,
         credit_term: customer3.credit_term,
         discount: '0',
-        total: '1872.5',
+        vat: '0.07',
+        total: '1750',
+        total_in_vat: '1872.5',
         created_at: new Date(),
         updated_at: new Date(),
       },
@@ -44,8 +48,10 @@ module.exports = {
         po: '',
         payment_term: customer1.payment_term,
         credit_term: customer1.credit_term,
-        discount: '0',
-        total: '1016.5',
+        discount: '0.05',
+        vat: '0.07',
+        total: '950',
+        total_in_vat: '1016.5',
         created_at: new Date(),
         updated_at: new Date(),
       },
@@ -55,10 +61,12 @@ module.exports = {
         so: '631204',
         date: new Date(),
         po: '',
-        payment_term: customer2.payment_term,
-        credit_term: customer2.credit_term,
+        payment_term: customer1.payment_term,
+        credit_term: customer1.credit_term,
         discount: '0',
-        total: '1540.8',
+        vat: '0.07',
+        total: '1440',
+        total_in_vat: '1540.8',
         created_at: new Date(),
         updated_at: new Date(),
       },

@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Customer = sequelize.define(
     'Customer',
     {
+      area_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       code: {
         type: DataTypes.STRING,
         allowNull: false,

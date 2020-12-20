@@ -2,23 +2,17 @@ module.exports = (sequelize, DataTypes) => {
   const ProductList = sequelize.define(
     'ProductList',
     {
-      discount: {
-        type: DataTypes.DOUBLE,
-      },
       quantity: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
       },
       amount: {
-        type: DataTypes.DOUBLE,
-      },
-      vat: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
       },
       price_in_vat: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
       },
       amount_in_vat: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
       },
     },
     {

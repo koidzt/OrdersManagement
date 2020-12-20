@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('products', [
       {
-        product_code: 'POM-001',
+        code: 'POM-001',
         name: 'product1',
         description: 'description1',
         unit: 'bottle',
@@ -13,7 +13,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-002',
+        code: 'POM-002',
         name: 'product2',
         description: 'description2',
         unit: 'box',
@@ -22,7 +22,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-003',
+        code: 'POM-003',
         name: 'product3',
         description: 'description3',
         unit: 'tube',
@@ -31,7 +31,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-004',
+        code: 'POM-004',
         name: 'product4',
         description: 'description4',
         unit: 'unit',
@@ -40,7 +40,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-005',
+        code: 'POM-005',
         name: 'product5',
         description: 'description5',
         unit: 'box',
@@ -49,7 +49,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-006',
+        code: 'POM-006',
         name: 'product6',
         description: 'description6',
         unit: 'carton',
@@ -58,7 +58,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        product_code: 'POM-007',
+        code: 'POM-007',
         name: 'product7',
         description: 'description7',
         unit: 'box',
