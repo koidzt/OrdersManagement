@@ -13,7 +13,7 @@ module.exports = {
       {
         user_id: user1.id,
         customer_id: customer2.id,
-        so: '631201',
+        so: '63120001',
         date: new Date(),
         po: '',
         payment_term: customer2.payment_term,
@@ -28,7 +28,7 @@ module.exports = {
       {
         user_id: user2.id,
         customer_id: customer3.id,
-        so: '631202',
+        so: '63120002',
         date: new Date(),
         po: '',
         payment_term: customer3.payment_term,
@@ -43,7 +43,7 @@ module.exports = {
       {
         user_id: user1.id,
         customer_id: customer1.id,
-        so: '631203',
+        so: '63120003',
         date: new Date(),
         po: '',
         payment_term: customer1.payment_term,
@@ -58,7 +58,7 @@ module.exports = {
       {
         user_id: user1.id,
         customer_id: customer1.id,
-        so: '631204',
+        so: '63120004',
         date: new Date(),
         po: '',
         payment_term: customer1.payment_term,

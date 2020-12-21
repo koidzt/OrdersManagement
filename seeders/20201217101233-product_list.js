@@ -4,10 +4,10 @@ const { SalesOrder, Product } = require('../models');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const salesOrder1 = await SalesOrder.findOne({ where: { so: '631201' } });
-    const salesOrder2 = await SalesOrder.findOne({ where: { so: '631202' } });
-    const salesOrder3 = await SalesOrder.findOne({ where: { so: '631203' } });
-    const salesOrder4 = await SalesOrder.findOne({ where: { so: '631204' } });
+    const salesOrder1 = await SalesOrder.findOne({ where: { so: '63120001' } });
+    const salesOrder2 = await SalesOrder.findOne({ where: { so: '63120002' } });
+    const salesOrder3 = await SalesOrder.findOne({ where: { so: '63120003' } });
+    const salesOrder4 = await SalesOrder.findOne({ where: { so: '63120004' } });
     const product1 = await Product.findOne({ where: { name: 'product1' } });
     const product2 = await Product.findOne({ where: { name: 'product2' } });
     const product3 = await Product.findOne({ where: { name: 'product3' } });
