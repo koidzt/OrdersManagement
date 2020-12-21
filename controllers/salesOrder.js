@@ -52,7 +52,7 @@ const getAllSalesOrder = async (req, res) => {
       })
     ).map((e) => e.id);
 
-    const allSalesOrder = await db.SalesOder.findAll({
+    const allSalesOrder = await db.SalesOrder.findAll({
       where: { user_id: allEmployeeOfDepartmentIds },
       include: [
         {
@@ -70,7 +70,7 @@ const getAllSalesOrder = async (req, res) => {
         },
       ],
     });
-    res.statue(200).send(allSalesOrder);
+    res.status(200).send(allSalesOrder);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -78,7 +78,7 @@ const getAllSalesOrder = async (req, res) => {
 
 const getAllMySalesOrder = async (req, res) => {
   try {
-    const allMySalesOrder = await db.SalesOder.findAll({
+    const allMySalesOrder = await db.SalesOrder.findAll({
       where: { user_id: req.user.id },
       include: [
         {
@@ -104,7 +104,7 @@ const getAllMySalesOrder = async (req, res) => {
 const getSalesOrderById = async (req, res) => {
   try {
     const salesOrderId = req.params.id;
-    const readSalesOrderById = await db.SalesOder.findOne({
+    const readSalesOrderById = await db.SalesOrder.findOne({
       where: { id: salesOrderId, user_id: req.user.id },
       include: [
         {

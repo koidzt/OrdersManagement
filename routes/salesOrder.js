@@ -12,8 +12,8 @@ const {
 const auth = passport.authenticate('jwt', { session: false });
 
 router.post('/', auth, createSalesOrder);
-router.get('/', auth, getAllSalesOrder);
-router.get('/', auth, getAllMySalesOrder);
+// router.get('/', auth, getAllSalesOrder); //sales-co
+router.get('/', auth, getAllMySalesOrder); //sales-Rep
 router.get('/:id', auth, getSalesOrderById);
 router.put('/:id', auth, editSalesOrderById);
 router.delete('/:id', auth, deleteSalesOrderById);
