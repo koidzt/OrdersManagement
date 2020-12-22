@@ -10,14 +10,14 @@ const option = {
 const jwtStrategy = new Strategy(option, async (payload, done) => {
   try {
     const targetUser = await db.User.findOne({ where: { id: payload.id } });
-    console.log(targetUser, payload);
+    // console.log(targetUser, payload);
     if (targetUser) {
-      console.log(
-        new Date(payload.created_at),
-        typeof new Date(payload.created_at),
-        targetUser.updated_at,
-        typeof targetUser.updated_at
-      );
+      // console.log(
+      //   new Date(payload.created_at),
+      //   typeof new Date(payload.created_at),
+      //   targetUser.updated_at,
+      //   typeof targetUser.updated_at
+      // );
 
       if (new Date(payload.created_at) < targetUser.updated_at) {
         done(null, false);

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+        defaultValue: new Date(),
       },
       po: {
         type: DataTypes.STRING,
@@ -23,11 +24,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       discount: {
-        type: DataTypes.DOUBLE,
-        defaultValue: '0',
+        type: DataTypes.DECIMAL(5, 2),
+        defaultValue: 0,
       },
       vat: {
-        type: DataTypes.DECIMAL(3, 2),
+        type: DataTypes.DECIMAL(5, 2),
+        defaultValue: 7,
       },
       total: {
         type: DataTypes.DECIMAL(10, 2),
@@ -36,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       total_in_vat: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM(['Pending Approval', 'Approved', 'Cancel']),
+        allowNull: false,
+        defaultValue: 'Pending Approval',
       },
     },
     {

@@ -3,6 +3,7 @@ const passport = require('passport');
 const {
   createSalesOrder,
   getAllSalesOrder,
+  getAllSalesOrderOfDepartment,
   getAllMySalesOrder,
   getSalesOrderById,
   editSalesOrderById,
@@ -12,7 +13,8 @@ const {
 const auth = passport.authenticate('jwt', { session: false });
 
 router.post('/', auth, createSalesOrder);
-// router.get('/', auth, getAllSalesOrder); //sales-co
+router.get('/all', auth, getAllSalesOrder);
+// router.get('/', auth, getAllSalesOrderOfDepartment); //sales-co
 router.get('/', auth, getAllMySalesOrder); //sales-Rep
 router.get('/:id', auth, getSalesOrderById);
 router.put('/:id', auth, editSalesOrderById);

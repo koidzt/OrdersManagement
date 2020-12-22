@@ -42,6 +42,18 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        code: '631204',
+        email: 'saleCo1@OrderManage.com',
+        password: bcryptjs.hashSync('saleCo1', salt),
+        first_name: 'Coordinator',
+        last_name: 'Ordermanage',
+        department: 'OTC',
+        position: 'Sales Coordinator',
+        area_code: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
   down: async (queryInterface, Sequelize) => {

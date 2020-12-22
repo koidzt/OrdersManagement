@@ -1,10 +1,35 @@
+const { Op } = require('sequelize');
 const db = require('../models');
 
 //CREATE SALES ORDER WITH PRODUCT LIST
 const createSalesOrder = async (req, res) => {
   try {
-    const { so, date, po, customer_id, payment_term, credit_term, discount, productList } = req.body;
-    if (so || date || customer_id || payment_term || credit_term) {
+    const defaultSo = async () => {
+      const date = new Date();
+      const month = String(date.getMonth() + 1);
+      if (Number(month) < 10) {
+        month = '0' + month;
+      }
+      const year = String(date.getFullYear() + 43);
+      const defaultTopFourthSo = year.slice(2) + month;
+      const lastSalesOrder = await db.SalesOrder.findOne({
+        where: {
+          so: { [Op.startsWith]: defaultTopFourthSo },
+        },
+        order: [['so', 'DESC']],
+      });
+      let newSoNumber;
+      if (lastSalesOrder) {
+        newSoNumber = String(Number(lastSalesOrder.so) + 1);
+      } else {
+        newSoNumber = defaultTopFourthSo + '0001';
+      }
+      console.log({ newSoNumber, type: typeof newSoNumber });
+      return newSoNumber;
+    };
+
+    const { date, po, customer_id, payment_term, credit_term, discount, total, total_in_vat, productList } = req.body;
+    if (date && customer_id && payment_term && credit_term && total && total_in_vat) {
       const total = productList.reduce((acc, product) => {
         return acc + product.amount;
       }, 0);
@@ -15,7 +40,7 @@ const createSalesOrder = async (req, res) => {
       const newSalesOrder = await db.SalesOrder.create({
         user_id: req.user.id,
         customer_id,
-        so,
+        so: await defaultSo(),
         date,
         po,
         payment_term,
@@ -24,15 +49,15 @@ const createSalesOrder = async (req, res) => {
         total,
         total_in_vat,
       });
-
+      console.log(newSalesOrder.id);
       productList.forEach(async (product) => {
         await db.ProductList.create({
-          sale_order_id: newSalesOrder.id,
+          sales_order_id: newSalesOrder.id,
           product_id: product.id,
-          discount: product.discount,
+          // discount: product.discount,
           quantity: product.quantity,
-          amount: product.amount * (1 - product.discount),
-          vat: product.vat,
+          amount: product.amount,
+          // vat: product.vat,
           price_in_vat: product.price_in_vat,
           amount_in_vat: product.amount_in_vat,
         });
@@ -45,6 +70,31 @@ const createSalesOrder = async (req, res) => {
 };
 
 const getAllSalesOrder = async (req, res) => {
+  try {
+    const allSalesOrder = await db.SalesOrder.findAll({
+      include: [
+        {
+          model: db.User,
+          attributes: ['id', 'first_name', 'last_name', 'department', 'position', 'area_code'],
+          //attributer คือโหลดเอาข้อมูลเฉพาะที่ใส่ ถ้าไม่มี attributer คือเอาข้อมูลทั้งหมดในตาราง
+        },
+        {
+          model: db.Customer,
+          attributes: ['id', 'area_code', 'code', 'name', 'contact', 'phone', 'tel'],
+        },
+        {
+          model: db.ProductList,
+          include: [{ model: db.Product }],
+        },
+      ],
+    });
+    res.status(200).send(allSalesOrder);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+const getAllSalesOrderOfDepartment = async (req, res) => {
   try {
     const allEmployeeOfDepartmentIds = (
       await db.User.findAll({
@@ -147,6 +197,7 @@ const deleteSalesOrderById = async (req, res) => {
 module.exports = {
   createSalesOrder,
   getAllSalesOrder,
+  getAllSalesOrderOfDepartment,
   getAllMySalesOrder,
   getSalesOrderById,
   editSalesOrderById,
