@@ -28,7 +28,18 @@ const createSalesOrder = async (req, res) => {
       return newSoNumber;
     };
 
-    const { date, po, customer_id, payment_term, credit_term, discount, total, total_in_vat, productList } = req.body;
+    const {
+      date,
+      po,
+      customer_id,
+      payment_term,
+      credit_term,
+      discount,
+      total,
+      total_ex_vat,
+      total_in_vat,
+      productList,
+    } = req.body;
     if (date && customer_id && payment_term && credit_term && total && total_in_vat) {
       const total = productList.reduce((acc, product) => {
         return acc + product.amount;
@@ -47,6 +58,7 @@ const createSalesOrder = async (req, res) => {
         credit_term,
         discount,
         total,
+        total_ex_vat,
         total_in_vat,
       });
       console.log(newSalesOrder.id);
@@ -62,7 +74,7 @@ const createSalesOrder = async (req, res) => {
           amount_in_vat: product.amount_in_vat,
         });
       });
-      res.status(201).send('Created Sales Order success.');
+      res.status(201).send({ newSalesOrder });
     }
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -81,6 +93,12 @@ const getAllSalesOrder = async (req, res) => {
         {
           model: db.Customer,
           attributes: ['id', 'area_code', 'code', 'name', 'contact', 'phone', 'tel'],
+          include: [
+            {
+              model: db.CustomerAddress,
+              attributes: ['id', 'address', 'subdistrict', 'district', 'province', 'zip_code'],
+            },
+          ],
         },
         {
           model: db.ProductList,
@@ -113,6 +131,12 @@ const getAllSalesOrderOfDepartment = async (req, res) => {
         {
           model: db.Customer,
           attributes: ['id', 'area_code', 'code', 'name', 'contact', 'phone', 'tel'],
+          include: [
+            {
+              model: db.CustomerAddress,
+              attributes: ['id', 'address', 'subdistrict', 'district', 'province', 'zip_code'],
+            },
+          ],
         },
         {
           model: db.ProductList,
@@ -138,6 +162,12 @@ const getAllMySalesOrder = async (req, res) => {
         {
           model: db.Customer,
           attributes: ['id', 'area_code', 'code', 'name', 'contact', 'phone', 'tel'],
+          include: [
+            {
+              model: db.CustomerAddress,
+              attributes: ['id', 'address', 'subdistrict', 'district', 'province', 'zip_code'],
+            },
+          ],
         },
         {
           model: db.ProductList,
@@ -154,6 +184,7 @@ const getAllMySalesOrder = async (req, res) => {
 const getSalesOrderById = async (req, res) => {
   try {
     const salesOrderId = req.params.id;
+    console.log(salesOrderId, req.user.id);
     const readSalesOrderById = await db.SalesOrder.findOne({
       where: { id: salesOrderId, user_id: req.user.id },
       include: [
@@ -164,7 +195,14 @@ const getSalesOrderById = async (req, res) => {
         {
           model: db.Customer,
           attributes: ['id', 'area_code', 'code', 'name', 'contact', 'phone', 'tel'],
+          include: [
+            {
+              model: db.CustomerAddress,
+              attributes: ['id', 'address', 'subdistrict', 'district', 'province', 'zip_code'],
+            },
+          ],
         },
+
         {
           model: db.ProductList,
           include: [{ model: db.Product }],
