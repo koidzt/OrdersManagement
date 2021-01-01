@@ -186,7 +186,7 @@ const getSalesOrderById = async (req, res) => {
     const salesOrderId = req.params.id;
     console.log(salesOrderId, req.user.id);
     const readSalesOrderById = await db.SalesOrder.findOne({
-      where: { id: salesOrderId, user_id: req.user.id },
+      where: { id: salesOrderId },
       include: [
         {
           model: db.User,
@@ -209,6 +209,11 @@ const getSalesOrderById = async (req, res) => {
         },
       ],
     });
+    if (req.user.position === 'Sales Representative') {
+      if (readSalesOrderById.User.id !== req.user.id) {
+        return res.send(null);
+      }
+    }
     res.send(readSalesOrderById);
   } catch (err) {
     res.status(500).send({ message: err.message });
