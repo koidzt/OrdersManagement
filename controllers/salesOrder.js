@@ -6,11 +6,14 @@ const createSalesOrder = async (req, res) => {
   try {
     const defaultSo = async () => {
       const date = new Date();
-      const month = String(date.getMonth() + 1);
+      console.log(date);
+      let month = String(date.getMonth() + 1);
       if (Number(month) < 10) {
         month = '0' + month;
       }
-      const year = String(date.getFullYear() + 43);
+      console.log(month);
+      let year = String(date.getFullYear() + 43);
+      console.log(year);
       const defaultTopFourthSo = year.slice(2) + month;
       const lastSalesOrder = await db.SalesOrder.findOne({
         where: {
