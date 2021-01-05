@@ -225,6 +225,16 @@ const getSalesOrderById = async (req, res) => {
 
 const editSalesOrderById = async (req, res) => {
   try {
+    const salesOrderId = req.params.id;
+    // console.log(salesOrderId, req.user.id);
+    const targetSalesOrderById = await db.SalesOrder.findOne({ where: { id: salesOrderId } });
+    // console.log(targetSalesOrderById);
+    console.log(targetSalesOrderById.status);
+    if (targetSalesOrderById) {
+      const { status } = req.body;
+      await targetSalesOrderById.update({ status });
+      res.status(200).send({ message: 'update is success!' });
+    }
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
